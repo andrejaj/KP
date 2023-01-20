@@ -5,6 +5,8 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPWorker", "KPWorker\KPWorker.csproj", "{1178B7AE-030E-4EEF-BDB9-7DF421B0DEAF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPService", "KPService\KPService.csproj", "{656017FA-71B9-4208-820D-24B5C17B8FE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1178B7AE-030E-4EEF-BDB9-7DF421B0DEAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1178B7AE-030E-4EEF-BDB9-7DF421B0DEAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1178B7AE-030E-4EEF-BDB9-7DF421B0DEAF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{656017FA-71B9-4208-820D-24B5C17B8FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656017FA-71B9-4208-820D-24B5C17B8FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656017FA-71B9-4208-820D-24B5C17B8FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656017FA-71B9-4208-820D-24B5C17B8FE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
