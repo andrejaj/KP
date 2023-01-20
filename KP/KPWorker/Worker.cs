@@ -22,11 +22,11 @@ namespace KPWorker
             {
                 _logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
                                 
-                _dataScraper.LoadData();
+                //_dataScraper.LoadData();
 
                 _logger.LogInformation("Worker finished at: {time}", DateTimeOffset.Now);
 
-                await Task.Delay(TimeSpan.FromDays(DelayInDays), stoppingToken);
+                await Task.Delay(TimeSpan.FromSeconds(DelayInDays), stoppingToken);
 
                 // When completed, the entire app host will stop.
                 //_lifetime.StopApplication();

@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+    <PackageReference Include="NReco.Logging.File" Version="1.1.5" />
   </ItemGroup>
 
   <ItemGroup>
