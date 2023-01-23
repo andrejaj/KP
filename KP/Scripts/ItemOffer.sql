@@ -11,13 +11,14 @@ GO
 CREATE TABLE [dbo].[ItemOffer](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Sku] [bigint] NULL,
-	[PriceCurrency] [nchar](4) NULL,
+	[PriceCurrency] [smallint] NULL,
 	[Price] [int] NULL,
-	[Condition] [int] NULL,
+	[Condition] [smallint] NULL,
 	[SellerId] [uniqueidentifier] NOT NULL,
 	[ProductId] [uniqueidentifier] NOT NULL,
-	[PriceNote] [nvarchar](15) NULL,
-	[Status] [int] NULL,
+	[Note] [nchar](150) NULL,
+	[Availability] [smallint] NULL,
+	[ValidUntil] [datetime] NULL,
 	[Created] [datetime] NULL,
 	[Modified] [datetime] NULL,
  CONSTRAINT [PK_Offer] PRIMARY KEY CLUSTERED 

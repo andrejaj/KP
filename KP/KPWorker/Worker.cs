@@ -22,7 +22,7 @@ namespace KPWorker
             {
                 _logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
                                 
-                //_dataScraper.LoadData();
+                _dataScraper.LoadData();
 
                 _logger.LogInformation("Worker finished at: {time}", DateTimeOffset.Now);
 
