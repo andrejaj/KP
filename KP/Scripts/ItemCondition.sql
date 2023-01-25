@@ -1,7 +1,7 @@
 USE [KPProducts]
 GO
 
-/****** Object:  Table [dbo].[ItemCondition]    Script Date: 23/01/2023 18:01:55 ******/
+/****** Object:  Table [dbo].[ItemCondition]    Script Date: 25/01/2023 15:59:44 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -18,4 +18,11 @@ CREATE TABLE [dbo].[ItemCondition](
 ) ON [PRIMARY]
 GO
 
-
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (1, 'DamagedCondition')
+GO
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (2, 'NewCondition')
+GO
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (3, 'RefurbishedCondition')
+GO
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (4, 'UsedCondition')
+GO

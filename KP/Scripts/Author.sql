@@ -1,7 +1,7 @@
 USE [KPProducts]
 GO
 
-/****** Object:  Table [dbo].[Author]    Script Date: 19/01/2023 14:20:15 ******/
+/****** Object:  Table [dbo].[Author]    Script Date: 25/01/2023 15:26:54 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,8 +13,8 @@ CREATE TABLE [dbo].[Author](
 	[LastName] [nvarchar](50) NOT NULL,
 	[Nickname] [nvarchar](15) NULL,
 	[Id] [uniqueidentifier] NOT NULL,
-	[Created] [datetime] NULL,
-	[Modified] [datetime] NULL,
+	[Created] [datetime] NOT NULL,
+	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_Author] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -23,6 +23,12 @@ CREATE TABLE [dbo].[Author](
 GO
 
 ALTER TABLE [dbo].[Author] ADD  CONSTRAINT [DF_Author_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+ALTER TABLE [dbo].[Author] ADD  CONSTRAINT [DF_Author_Created]  DEFAULT (getdate()) FOR [Created]
+GO
+
+ALTER TABLE [dbo].[Author] ADD  CONSTRAINT [DF_Author_Modified]  DEFAULT (getdate()) FOR [Modified]
 GO
 
 

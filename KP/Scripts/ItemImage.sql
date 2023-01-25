@@ -1,7 +1,7 @@
 USE [KPProducts]
 GO
 
-/****** Object:  Table [dbo].[ProductImage]    Script Date: 19/01/2023 14:32:27 ******/
+/****** Object:  Table [dbo].[ItemImage]    Script Date: 25/01/2023 15:59:52 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -10,10 +10,10 @@ GO
 
 CREATE TABLE [dbo].[ItemImage](
 	[Id] [uniqueidentifier] NOT NULL,
-	[url] [nvarchar](50) NULL,
+	[url] [nchar](300) NOT NULL,
 	[ItemId] [uniqueidentifier] NOT NULL,
-	[Created] [datetime] NULL,
-	[Modified] [datetime] NULL,
+	[Created] [datetime] NOT NULL,
+	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_ProductImage] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -22,6 +22,12 @@ CREATE TABLE [dbo].[ItemImage](
 GO
 
 ALTER TABLE [dbo].[ItemImage] ADD  CONSTRAINT [DF_ItemImage_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+ALTER TABLE [dbo].[ItemImage] ADD  CONSTRAINT [DF_ItemImage_Created]  DEFAULT (getdate()) FOR [Created]
+GO
+
+ALTER TABLE [dbo].[ItemImage] ADD  CONSTRAINT [DF_ItemImage_Modified]  DEFAULT (getdate()) FOR [Modified]
 GO
 
 

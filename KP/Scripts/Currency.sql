@@ -19,3 +19,8 @@ CREATE TABLE [dbo].[Currency](
 GO
 
 
+INSERT INTO [dbo].[Currency] (Id, Description) VALUES (1, 'Euro')
+GO
+INSERT INTO [dbo].[Currency] (Id, Description) VALUES (2, 'RSD')
+GO
+

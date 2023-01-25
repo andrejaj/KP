@@ -1,7 +1,7 @@
 USE [KPProducts]
 GO
 
-/****** Object:  Table [dbo].[Seller]    Script Date: 19/01/2023 14:56:58 ******/
+/****** Object:  Table [dbo].[Seller]    Script Date: 25/01/2023 16:21:03 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -9,11 +9,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[Seller](
-	[Name] [nvarchar](50) NULL,
 	[Id] [uniqueidentifier] NOT NULL,
-	[Phone] [nchar](12) NULL,
-	[Created] [datetime] NULL,
-	[Modified] [datetime] NULL,
+	[Name] [nchar](20) NOT NULL,
+	[Phone] [nchar](15) NULL,
+	[Created] [datetime] NOT NULL,
+	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_Seller] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -24,4 +24,8 @@ GO
 ALTER TABLE [dbo].[Seller] ADD  CONSTRAINT [DF_Seller_Id]  DEFAULT (newid()) FOR [Id]
 GO
 
+ALTER TABLE [dbo].[Seller] ADD  CONSTRAINT [DF_Seller_Created]  DEFAULT (getdate()) FOR [Created]
+GO
 
+ALTER TABLE [dbo].[Seller] ADD  CONSTRAINT [DF_Seller_Modified]  DEFAULT (getdate()) FOR [Modified]
+GO
