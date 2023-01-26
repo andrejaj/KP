@@ -11,10 +11,15 @@ namespace KPService
     public class Service : IService
     {
         private readonly ILogger<Service> _logger;
+        private readonly MyConfiguration _myConfiguration;
 
-        public Service(ILogger<Service> logger) => _logger = logger;
+        public Service(ILogger<Service> logger, MyConfiguration myConfiguration)
+        {
+            _logger = logger;
+            _myConfiguration = myConfiguration;
+        }
 
-        private const string SearchUri = "https://novi.kupujemprodajem.com/umetnicka-dela-i-materijali/slike-starije-od-20-godina/pretraga?categoryId=2695&groupId=876&priceFrom=200&priceTo=2000&currency=eur";
+        //private const string SearchUri = "https://novi.kupujemprodajem.com/umetnicka-dela-i-materijali/slike-starije-od-20-godina/pretraga?categoryId=2695&groupId=876&priceFrom=200&priceTo=2000&currency=eur";
         
         public int GetPageCount()
         {
@@ -23,7 +28,7 @@ namespace KPService
             {
                 try
                 {
-                    var request = new RestRequest(SearchUri, Method.Get);
+                    var request = new RestRequest(_myConfiguration.SearchUri, Method.Get);
                     var response = client.Execute(request);
                     var content = ExtractValue(response.Content);
                     count = CalculatePageCount(content);
@@ -66,7 +71,7 @@ namespace KPService
                 {
                     using (var client = new RestClient())
                     {
-                        var request = new RestRequest(SearchUri + @"&page={i}", Method.Get);
+                        var request = new RestRequest(_myConfiguration.SearchUri + i);//SearchUri + @"&page={i}", Method.Get);
                         var response = client.Execute(request);
                         var content = response.Content;
                         list = ExtractItems(content);

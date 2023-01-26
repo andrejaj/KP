@@ -16,6 +16,6 @@ namespace KPService.DBModel
         public short ConditionId { get; set; } 
         public int SellerId { get; set; } 
         public short StatusId { get; set; } 
-        public DateTime PriceValidUntil { get; set; }
+        public DateTime ValidUntil { get; set; }
     }
 }

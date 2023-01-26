@@ -72,8 +72,8 @@ namespace KPService
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    var count = db.Execute(@"insert Item(Sku, Description, CurrencyId, Price, PriceTypeId, ConditionId, SellerId, StatusId, PriceValidUntil) values (@sku, @description, @currencyId, @price, @priceTypeId, @conditionId, @sellerId, @statusId, @priceValidUntil)",
-                        new { sku = item.Sku, description = item.Description, currencyId = item.CurrencyId, price = item.Price, priceTypeId = item.PriceTypeId, conditionId = item.ConditionId, sellerId = item.SellerId, statusId = item.StatusId, priceValidUntil = item.PriceValidUntil });
+                    var count = db.Execute(@"insert Item(Sku, Description, CurrencyId, Price, PriceTypeId, ConditionId, SellerId, StatusId, ValidUntil) values (@sku, @description, @currencyId, @price, @priceTypeId, @conditionId, @sellerId, @statusId, @validUntil)",
+                        new { sku = item.Sku, description = item.Description, currencyId = item.CurrencyId, price = item.Price, priceTypeId = item.PriceTypeId, conditionId = item.ConditionId, sellerId = item.SellerId, statusId = item.StatusId, validUntil = item.ValidUntil});
                 }
             }
             catch (Exception ex)
