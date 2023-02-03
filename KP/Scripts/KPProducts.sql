@@ -46,6 +46,92 @@ GO
 ALTER TABLE [dbo].[Author] ADD  CONSTRAINT [DF_Author_Modified]  DEFAULT (getdate()) FOR [Modified]
 GO
 
+/*** insert authors****/
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stanislav','Belozanski', 'Stasa')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milos','Sobajic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milos','Golubovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zora','Petrovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zora','Popovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ivan','Radovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan','Konjovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zivan','Vulic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Nikola','Besevic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milica','Besevic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Uros','Toskovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Boris','Rumjancev',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sava','Stojkov',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Beta','Vukanovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Mica','Popovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Svetislav','Vukovic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stojan','Trumic',NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milena','Pavlovic', 'Barili')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stojan','Celic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Spomenka', 'Pavlovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Petar', 'Tijesic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Svetolik', 'Lukic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Marko', 'Stupar', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Nikola', 'Graovac', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Jovan', 'Krizek', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sergej', 'Aparin', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Petar', 'Omcikus', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vladimir', 'Zelinski', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ljubica', 'Sokic', 'Cuca')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Fjedor', 'Kolesnikov', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Pasko', 'Vucetic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milos', 'Vuskovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan', 'Cetic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vinko', 'Grdan', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ante', 'Abramovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Petar', 'Markovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Paja', 'Jovanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Kosta', 'Hakman', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Bora', 'Stevanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milos', 'Gvozenovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sinisa', 'Vukovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Jelisaveta', 'Petrovic', NULL)
+GO
+
 /****** Item table  ******/
 USE [KPProducts]
 GO
@@ -337,4 +423,35 @@ GO
 INSERT INTO [dbo].[Status] (Id, Description) VALUES (2, 'Deactive')
 GO
 INSERT INTO [dbo].[Status] (Id, Description) VALUES (3, 'OnHold')
+GO
+
+USE [KPProducts]
+GO
+
+/****** Object:  Table [dbo].[VisitedOffers]    Script Date: 01/02/2023 18:34:04 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[VisitedOffers](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Sku] [bigint] NOT NULL,
+	[Created] [datetime] NOT NULL,
+	[Modified] [datetime] NOT NULL,
+ CONSTRAINT [PK_VisitedOffers] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[VisitedOffers] ADD  CONSTRAINT [DF_VisitedOffers_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+ALTER TABLE [dbo].[VisitedOffers] ADD  CONSTRAINT [DF_VisitedOffers_Created]  DEFAULT (getdate()) FOR [Created]
+GO
+
+ALTER TABLE [dbo].[VisitedOffers] ADD  CONSTRAINT [DF_VisitedOffers_Modified]  DEFAULT (getdate()) FOR [Modified]
 GO
