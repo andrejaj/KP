@@ -4,11 +4,12 @@ namespace KPService
 {
     public interface IRepository
     {
-        List<Author> GetAuthors();
+        IList<Author> GetAuthors();
         List<string> GetItemIds();
-        void InsertAuthor(Author author);
-        void InsertItem(Item item);
-        void InsertItemImages(List<ItemImage> itemImages);
+        int InsertVisitedOffers(string sku);
+        Guid InsertItem(Item item);
+        void InsertItemOffer(ItemOffer itemOffer, Guid id);
+        void InsertItemImages(ItemImages itemImages, Guid id);
         void InsertSeller(Seller seller);
     }
 }
