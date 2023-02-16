@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KPService.Model
+namespace KPService
 {
-    public class MyConfiguration
+    public class Configuration
     {
-        public string SearchUri { get; set; }
+        public string KPUrl { get; set; }
     }
 }

@@ -2,8 +2,9 @@
 
 namespace KPService
 {
-    public interface IMapperConfiguration
+    public interface IMapperConfigurator
     {
-        AutoMapper.MapperConfiguration GetMapperConfiguration();
+        //AutoMapper.MapperConfiguration GetMapperConfiguratio();
+        Mapper GetMapper();
     }
 }

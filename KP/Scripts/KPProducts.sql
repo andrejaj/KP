@@ -146,7 +146,8 @@ GO
 CREATE TABLE [dbo].[Item](
 	[Id] [uniqueidentifier] NOT NULL,
 	[AuthorId] [uniqueidentifier] NOT NULL,
-	[Description] [nchar](300) NULL,
+	[Title] [nchar](100) NULL,
+	[Description] [nchar](3000) NULL,
 	[Created] [datetime] NOT NULL,
 	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_Offer] PRIMARY KEY CLUSTERED 
@@ -183,6 +184,7 @@ CREATE TABLE [dbo].[ItemOffer](
 	[SellerId] [uniqueidentifier] NOT NULL,
 	[StatusId] [int] NULL,
 	[ValidUntil] [datetime] NOT NULL,
+	[Url] [nchar](300) NOT NULL,
 	[Created] [datetime] NOT NULL,
 	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_ItemOffer] PRIMARY KEY CLUSTERED 
@@ -454,4 +456,56 @@ ALTER TABLE [dbo].[VisitedOffers] ADD  CONSTRAINT [DF_VisitedOffers_Created]  DE
 GO
 
 ALTER TABLE [dbo].[VisitedOffers] ADD  CONSTRAINT [DF_VisitedOffers_Modified]  DEFAULT (getdate()) FOR [Modified]
+GO
+
+/****** Object:  Table [dbo].[RefreshSettings]    Script Date: 06/02/2023 14:35:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[RefreshSettings](
+	[Id] [uniqueidentifier] NOT NULL,
+	[Name] [nchar](20) NOT NULL,
+	[Refresh] [datetime] NOT NULL,
+ CONSTRAINT [PK_RefreshSettings] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[RefreshSettings] ADD  CONSTRAINT [DF_RefreshSettings_Id]  DEFAULT (newid()) FOR [Id]
+GO
+
+INSERT INTO [dbo].[RefreshSettings] (Name, Refresh) VALUES ('KPDataConsume', getdate())
+GO
+
+/****** Object:  Table [dbo].[RefreshSettings]    Script Date: 06/02/2023 14:35:54 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[PartialAuthorRecognition](
+	[ItemId] [uniqueidentifier] NOT NULL,
+	[AuthorId] [uniqueidentifier] NOT NULL,
+	[Created] [datetime] NOT NULL,
+	[Modified] [datetime] NOT NULL,
+ CONSTRAINT [PK_PartialAuthorRecognition] PRIMARY KEY CLUSTERED 
+(
+	[ItemId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[PartialAuthorRecognition] ADD  CONSTRAINT [DF_PartialAuthorRecognition_ItemId]  DEFAULT (newid()) FOR [ItemId]
+GO
+
+ALTER TABLE [dbo].[PartialAuthorRecognition] ADD  CONSTRAINT [DF_PartialAuthorRecognition_Created]  DEFAULT (getdate()) FOR [Created]
+GO
+
+ALTER TABLE [dbo].[PartialAuthorRecognition] ADD  CONSTRAINT [DF_PartialAuthorRecognition_Modified]  DEFAULT (getdate()) FOR [Modified]
 GO

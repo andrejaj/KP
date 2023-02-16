@@ -13,7 +13,7 @@ namespace KPService.Model
 
 
         [JsonProperty("name")]
-        public string AuthorName { get; set; }
+        public string Title { get; set; }
         
         [JsonProperty("image")]
         public IList<string> Images { get; set; }
@@ -22,7 +22,7 @@ namespace KPService.Model
         public string Description { get; set; }
         
         [JsonProperty("sku")]
-        public string Id { get; set; }
+        public string Sku { get; set; }
         
         [JsonProperty("offers")]
         public ItemOffer ItemOffer { get; set; }

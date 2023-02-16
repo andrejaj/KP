@@ -39,7 +39,7 @@ namespace KPService
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "GetItemIds failed to retrive items.");
+                
             }
             return itemIds ?? new List<string>();
         }
@@ -103,36 +103,37 @@ namespace KPService
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    var id = db.QuerySingle<Guid>(@"INSERT INTO Item(AuthorId, Description) OUTPUT INSERTED.Id VALUES (@authorId, @description)",
-                        new { authorId = item.AuthorId, description = item.Description});
+                    var id = db.QuerySingle<Guid>(@"INSERT INTO Item(AuthorId, Title, Description) OUTPUT INSERTED.Id VALUES (@authorId, @title, @description)",
+                        new { authorId = item.AuthorId, title = item.Title, description = item.Description});
                     return id;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"InsertItem failed to insert item {item.Id}");
+                _logger.LogError(ex, $"InsertItem failed to insert item {item.Title}");
             }
 
             return Guid.Empty;
         }
 
-        public void InsertItemOffer(DBModel.ItemOffer itemOffer, Guid id)
+        public void InsertItemOffer(DBModel.ItemOffer itemOffer)
         {
+            //note seller id should be guid
             try
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    var count = db.Execute(@"INSERT INTO ItemOffer(Sku, ItemId, CurrencyId, Price, PriceTypeId, ConditionId, SellerId, StatusId, ValidUntil) VALUES (@sku, @itemId, @currencyId, @price, @priceTypeId, @conditionId, @sellerId, @statusId, @validUntil)",
-                        new { sku = itemOffer.Sku, itemId = id, currencyId = itemOffer.CurrencyId, price = itemOffer.Price, priceTypeId = itemOffer.PriceTypeId, conditionId = itemOffer.ConditionId, sellerId = itemOffer.SellerId, statusId = itemOffer.StatusId, validUntil = itemOffer.ValidUntil });
+                    var count = db.Execute(@"INSERT INTO ItemOffer(Sku, ItemId, CurrencyId, Price, PriceTypeId, ConditionId, SellerId, StatusId, ValidUntil, Url) VALUES (@sku, @itemId, @currencyId, @price, @priceTypeId, @conditionId, @sellerId, @statusId, @validUntil, @url)",
+                        new { sku = itemOffer.Sku, itemId = itemOffer.ItemId, currencyId = itemOffer.CurrencyId, price = itemOffer.Price, priceTypeId = itemOffer.PriceTypeId, conditionId = itemOffer.ConditionId, sellerId = itemOffer.SellerId, statusId = itemOffer.StatusId, validUntil = itemOffer.ValidUntil, url = itemOffer.Url });
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"InsertItemOffer failed to insert item with {id} and {itemOffer.Sku}");
+                _logger.LogError(ex, $"InsertItemOffer failed to insert item with {itemOffer.ItemId} and {itemOffer.Sku}");
             }
         }
 
-        public void InsertItemImages(ItemImages itemImages, Guid id)
+        public void InsertItemImages(ItemImages itemImages)
         {
             try
             {
@@ -140,29 +141,60 @@ namespace KPService
                 {
                     foreach (var image in itemImages.Images)
                     {
-                        var count = db.Execute(@"INSERT INTO ItemImage(Url, ItemId) VALUES (@url, @itemId)", new { url = image, itemId = id });
+                        var count = db.Execute(@"INSERT INTO ItemImage(Url, ItemId) VALUES (@url, @itemId)", new { url = image, itemId = itemImages.ItemId });
                     }
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"InsertItemImages failed to insert images with item id {id}");
+                _logger.LogError(ex, $"InsertItemImages failed to insert images with item id {itemImages.ItemId}");
             }
         }
 
-        public void InsertSeller(DBModel.Seller seller)
+        public Guid InsertSeller(DBModel.Seller seller)
         {
             try
             {
-                using (IDbConnection db = new SqlConnection(_connectionString))
+                var s = GetSeller(seller.Name);
+                if (s != null)
                 {
-                    var count = db.Execute(@"INSERT INTO Seller(Name, Phone) VALUES (@name, @phone)", new { name = seller.Name, phone = seller.Phone });
+                    return s.Id;
+                }
+                else 
+                {
+                    using (IDbConnection db = new SqlConnection(_connectionString))
+                    {
+                        //if seller exists return id
+                        var id = db.QuerySingle<Guid>(@"INSERT INTO Seller(Name, Phone) OUTPUT INSERTED.Id VALUES (@name, @phone)", new { name = seller.Name, phone = seller.Phone });
+                        return id;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, $"InsertSeller failed to insert {seller.Name}");
             }
+
+            return Guid.Empty;
+        }
+
+        public DBModel.Seller GetSeller(string name)
+        {
+            DBModel.Seller seller = null;
+
+            try
+            {
+                using (IDbConnection db = new SqlConnection(_connectionString))
+                {
+                    var sellers = db.Query<DBModel.Seller>($"SELECT ID, Name, Phone FROM [KPProducts].[dbo].[Seller] Where Name Like '{name}'");
+                    seller = sellers.FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "GetSeller failed to retrive item.");
+            }
+            return seller;
         }
     }
 }

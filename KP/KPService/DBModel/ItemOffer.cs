@@ -8,15 +8,15 @@ namespace KPService.DBModel
 {
     public class ItemOffer
     {
-        public Guid Id { get; set; }
-        public int Sku { get; set; }
         public Guid ItemId { get; set; }
+        public Guid SellerId { get; set; } 
+        public int Sku { get; set; }
         public short CurrencyId { get; set; } 
-        public int Price { get; set; } 
+        public double Price { get; set; } 
         public short? PriceTypeId { get; set; }
         public short ConditionId { get; set; } 
-        public int SellerId { get; set; } 
         public short StatusId { get; set; } 
         public DateTime ValidUntil { get; set; }
+        public string Url { get; set; }
     }
 }

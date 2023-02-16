@@ -8,27 +8,26 @@ using System.Xml;
 
 namespace KPService
 {
-    public class Service : IService
+    public class ItemService : IItemService
     {
-        private readonly ILogger<Service> _logger;
-        private readonly MyConfiguration _myConfiguration;
+        private readonly ILogger<ItemService> _logger;
+        private readonly Configuration _myConfiguration;
 
-        public Service(ILogger<Service> logger, MyConfiguration myConfiguration)
+        public ItemService(ILogger<ItemService> logger, Configuration myConfiguration)
         {
             _logger = logger;
             _myConfiguration = myConfiguration;
         }
 
-        //private const string SearchUri = "https://novi.kupujemprodajem.com/umetnicka-dela-i-materijali/slike-starije-od-20-godina/pretraga?categoryId=2695&groupId=876&priceFrom=200&priceTo=2000&currency=eur";
-        
-        public int GetPageCount()
+        protected int Count => GetPageCount();
+        private int GetPageCount()
         {
             int count = 0;
             using (var client = new RestClient())
             {
                 try
                 {
-                    var request = new RestRequest(_myConfiguration.SearchUri, Method.Get);
+                    var request = new RestRequest(_myConfiguration.KPUrl, Method.Get);
                     var response = client.Execute(request);
                     var content = ExtractValue(response.Content);
                     count = CalculatePageCount(content);
@@ -61,20 +60,21 @@ namespace KPService
             return pageCount;
         }
 
-        public List<string> GetItems(int count)
+        public List<string> GetItems()
         {
-
             var list = new List<string>();
-            for (int i = 1; i <= count; i++)
+            
+            for (int i = 1; i <= Count; i++)
             {
                 try
                 {
                     using (var client = new RestClient())
                     {
-                        var request = new RestRequest(_myConfiguration.SearchUri + i);//SearchUri + @"&page={i}", Method.Get);
+                        var request = new RestRequest(_myConfiguration.KPUrl + "&page="+i, Method.Get);//SearchUri + @"&page={i}", Method.Get);
                         var response = client.Execute(request);
                         var content = response.Content;
-                        list = ExtractItems(content);
+                        var newItems = ExtractItems(content);
+                        list.AddRange(newItems);
                     }
                 }
                 catch (Exception ex)

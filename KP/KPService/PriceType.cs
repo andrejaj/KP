@@ -8,6 +8,7 @@ namespace KPService
 {
     internal enum PriceType
     {
+        Cena,
         Kontakt,
         Dogovor,
         Pozvati,
