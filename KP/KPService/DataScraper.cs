@@ -37,7 +37,13 @@ namespace KPService
             _logger.LogInformation("Started LoadData from Kp.");
 
             var items = _itemService.GetItems();
+
+            _logger.LogInformation($"items count {items.Count}");
+
             var newItems = _pipelineProcessor.Process(items);
+
+            _logger.LogInformation($"new items processed {newItems.Count()}");
+
             var kpItems = newItems.Select(x => _itemService.GetItem(x)).ToList();
             _dbService.Write(kpItems);
 

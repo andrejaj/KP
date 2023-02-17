@@ -9,6 +9,6 @@ namespace KPService
     internal enum Currency
     {
         EUR,
-        DIN,
+        RSD,
     }
 }

@@ -329,6 +329,8 @@ CREATE TABLE [dbo].[PriceType](
 ) ON [PRIMARY]
 GO
 
+INSERT INTO [dbo].[PriceType] (PriceTypeId, Description) VALUES (0, 'Cena')
+GO
 INSERT INTO [dbo].[PriceType] (PriceTypeId, Description) VALUES (1, 'Kontakt')
 GO
 INSERT INTO [dbo].[PriceType] (PriceTypeId, Description) VALUES (2, 'Dogovor')

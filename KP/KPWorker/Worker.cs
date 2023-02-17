@@ -22,13 +22,13 @@ namespace KPWorker
             {
                 while (!stoppingToken.IsCancellationRequested)
                 {
-                    _logger.LogDebug("Worker started at: {time}", DateTimeOffset.Now);
+                    _logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
 
                     _dataScraper.LoadData();
 
-                    _logger.LogDebug("Worker finished at: {time}", DateTimeOffset.Now);
+                    _logger.LogInformation("Worker finished at: {time}", DateTimeOffset.Now);                   
 
-                    await Task.Delay(TimeSpan.FromSeconds(DelayInDays) /*TimeSpan.FromDays(DelayInDays)*/, stoppingToken);
+                    await Task.Delay(TimeSpan.FromDays(DelayInDays), stoppingToken);
 
                     // When completed, the entire app host will stop.
                     //_lifetime.StopApplication();

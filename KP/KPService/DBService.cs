@@ -19,6 +19,7 @@ namespace KPService
 
         public void Write(List<Model.Item> items)
         {
+            _logger.LogInformation("Started Writing data to DB.");
             foreach (var kpItem in items)
             {
                 try
@@ -43,6 +44,7 @@ namespace KPService
                     _logger.LogError(ex, $"Write Item {kpItem.Title} with SKu:{kpItem.Sku} failed to map or write to the database.");
                 }
             }
+            _logger.LogInformation("Finished Writing data to DB.");
         }
     }
 }
