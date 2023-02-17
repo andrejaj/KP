@@ -8,7 +8,7 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace KPService.Filter
 {
-    internal class CompositeFilter : ICompositeFilter
+    public class CompositeFilter : ICompositeFilter
     {
         private readonly IRepository _repository;
 

@@ -1,51 +1,32 @@
 using KPService;
+using KPService.Filter;
+using KPService.PipelineFilter;
 using KPWorker;
-using Microsoft.Extensions.Configuration.Json;
-using NReco.Logging.File;
-using System.Configuration;
 
 IHost host = Host.CreateDefaultBuilder(args)
-    //.ConfigureLogging((hostContext, builder) =>
-    //{
-    //    builder.AddConfiguration(hostContext.Configuration.GetSection("Logging"));
-    //    builder.AddFile("");
-    //}
     .ConfigureServices((hostContext, services) =>
     {
         services.AddHostedService<Worker>();
-        services.AddTransient<IService, Service>();
+        services.AddSingleton(hostContext.Configuration.GetSection("myConfiguration").Get<Configuration>());
+        services.AddTransient<IItemService, ItemService>();
+        services.AddTransient<IMapperConfigurator, MapperConfigurator>();
+        services.AddTransient<IDBService, DBService>();
         services.AddTransient<IDataScraper, DataScraper>();
-        services.AddSingleton<IRepository>( x=> new Repository(hostContext.Configuration.GetConnectionString("KPConnection")));
+        services.AddTransient<IRepository>(x => new Repository(x.GetRequiredService<ILogger<Repository>>(), hostContext.Configuration.GetConnectionString("KPConnection")));
 
-        //services.AddLogging(loggingBuilder =>
-        //{
-        //    var loggingSection = hostContext.Configuration.GetSection("Logging");
-        //    var f = loggingBuilder.AddFile(loggingSection);
-        //});
+        services.AddTransient<ICompositeFilter, CompositeFilter>();
+        services.AddTransient<NewItemFilter>();
+        services.AddTransient<AuthorFilter>();
+        services.AddTransient<Pipeline<IEnumerable<string>>, ItemSelectionPipeline>();
+        services.AddTransient<IPipelineProcessor, PipelineProcessor>();
 
-        //services.AddLogging(loggingBuilder => 
-        //{ var loggingSection = hostContext.Configuration.GetSection("Logging"); 
-        //    loggingBuilder.AddFile(loggingSection); });
-        Action<FileLoggerOptions> configure = (p) =>
-        {
-            new FileLoggerOptions() { MaxRollingFiles = 10, FileSizeLimitBytes = 1, Append = true };
-        };
-        //services.AddLogging(loggingBuilder =>
-        //{
-        //    var loggingSection = hostContext.Configuration.GetSection("Logging");
-        //    loggingBuilder.AddFile(loggingSection);
-        //});
-        
         services.AddLogging(loggingBuilder =>
         {
-
-            loggingBuilder.AddFile("app.log", configure);
+            var loggingSection = hostContext.Configuration.GetSection("Logging");
+            loggingBuilder.AddFile(loggingSection);
         });
+
     })
-    //.ConfigureLogging((hostingContext, logging) => {
-    //    logging.AddConfiguration(hostingContext.Configuration.GetSection("File"));
-    //    logging.AddConsole();
-    //})
     .Build();
 
 await host.RunAsync();

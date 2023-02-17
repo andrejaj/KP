@@ -19,7 +19,6 @@ namespace KPService
             _myConfiguration = myConfiguration;
         }
 
-        protected int Count => GetPageCount();
         private int GetPageCount()
         {
             int count = 0;
@@ -64,7 +63,8 @@ namespace KPService
         {
             var list = new List<string>();
             
-            for (int i = 1; i <= Count; i++)
+            var count = GetPageCount();
+            for (int i = 1; i <= count; i++)
             {
                 try
                 {

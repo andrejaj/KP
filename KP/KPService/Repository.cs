@@ -1,10 +1,9 @@
 ﻿using Dapper;
 using KPService.DBModel;
-using KPService.Model;
+using KPService.Extensions;
 using Microsoft.Extensions.Logging;
 using System.Data;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 //using System.Transactions;
 
@@ -13,6 +12,8 @@ using System.Diagnostics;
 //    DoYourDapperWork();
 //    transactionScope.Complete();
 //}
+
+//Note: implement transaction and async calls!
 
 namespace KPService
 {
@@ -62,23 +63,6 @@ namespace KPService
             return authors ?? new List<Author>();
         }
 
-        //public string InsertAuthor(Author author)
-        //{
-        //    try
-        //    {
-        //        using (IDbConnection db = new SqlConnection(_connectionString))
-        //        {
-        //            var id = db.QuerySingle<Guid>(@"insert Author(FirstName, LastName, NickName) OUTPUT INSERTED.Id values (@firstname, @lastname, @nickname)", new { firstname = author.Firstname, lastname = author.Lastname, nickname = author.Nckname });
-        //            return id.ToString();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        //log
-        //    }
-        //    return null;
-        //}
-
         public int InsertVisitedOffers(string sku)
         {
             try
@@ -99,12 +83,13 @@ namespace KPService
 
         public Guid InsertItem(DBModel.Item item)
         {
+            const int MaxColumnSize = 4000;
             try
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
                     var id = db.QuerySingle<Guid>(@"INSERT INTO Item(AuthorId, Title, Description) OUTPUT INSERTED.Id VALUES (@authorId, @title, @description)",
-                        new { authorId = item.AuthorId, title = item.Title, description = item.Description});
+                        new { authorId = item.AuthorId, title = item.Title, description = item.Description.Truncate(MaxColumnSize) });
                     return id;
                 }
             }
@@ -118,7 +103,6 @@ namespace KPService
 
         public void InsertItemOffer(DBModel.ItemOffer itemOffer)
         {
-            //note seller id should be guid
             try
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
@@ -155,16 +139,15 @@ namespace KPService
         {
             try
             {
-                var s = GetSeller(seller.Name);
-                if (s != null)
+                var sellerFound = GetSeller(seller.Name);
+                if (sellerFound != null)
                 {
-                    return s.Id;
+                    return sellerFound.Id;
                 }
                 else 
                 {
                     using (IDbConnection db = new SqlConnection(_connectionString))
                     {
-                        //if seller exists return id
                         var id = db.QuerySingle<Guid>(@"INSERT INTO Seller(Name, Phone) OUTPUT INSERTED.Id VALUES (@name, @phone)", new { name = seller.Name, phone = seller.Phone });
                         return id;
                     }
@@ -186,7 +169,7 @@ namespace KPService
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    var sellers = db.Query<DBModel.Seller>($"SELECT ID, Name, Phone FROM [KPProducts].[dbo].[Seller] Where Name Like '{name}'");
+                    var sellers = db.Query<DBModel.Seller>($"SELECT ID, Name, Phone FROM [KPProducts].[dbo].[Seller] Where Name = '{name}'");
                     seller = sellers.FirstOrDefault();
                 }
             }

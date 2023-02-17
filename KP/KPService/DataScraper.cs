@@ -21,39 +21,27 @@ namespace KPService
     {
         private readonly IItemService _itemService;
         private readonly ILogger<ItemService> _logger;
-        private readonly IRepository _repository;
-        //private readonly IMapperConfigurator _mapperConfigurator;
         private readonly IDBService _dbService;
+        private readonly IPipelineProcessor _pipelineProcessor;
 
-        public DataScraper(ILogger<ItemService> logger, IItemService itemService, IRepository repository, IDBService dbService/*, IMapperConfigurator mapperConfigurator*/) 
+        public DataScraper(ILogger<ItemService> logger, IItemService itemService, IDBService dbService, IPipelineProcessor pipelineProcessor) 
         { 
             _logger= logger ?? throw new ArgumentNullException(nameof(logger));
-            _itemService = itemService ?? throw new ArgumentNullException(nameof(itemService)); 
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
+            _itemService = itemService ?? throw new ArgumentNullException(nameof(itemService));
             _dbService= dbService ?? throw new ArgumentNullException(nameof(dbService));
-            //_mapperConfigurator = mapperConfigurator ?? throw new ArgumentNullException(nameof(_mapperConfigurator));
+            _pipelineProcessor = pipelineProcessor ?? throw new ArgumentNullException(nameof(pipelineProcessor));
         }
 
         public void LoadData()
         {
-            _logger.LogInformation("Started LoadData");
+            _logger.LogInformation("Started LoadData from Kp.");
 
             var items = _itemService.GetItems();
-
-            //Construct the Pipeline object
-            var itemStatusPipeline = new ItemSelectionPipeline();
-
-            //Register the filters to be executed
-            itemStatusPipeline
-                .Register(new NewItemFilter(_repository))
-                //.Register(new AuthorFilter(null, _repository, null));
-
-            //Start pipeline processing
-            var newItems = itemStatusPipeline.Process(items);
+            var newItems = _pipelineProcessor.Process(items);
             var kpItems = newItems.Select(x => _itemService.GetItem(x)).ToList();
             _dbService.Write(kpItems);
 
-            _logger.LogInformation("Finished LoadData");
+            _logger.LogInformation("Finished LoadData from Kp.");
         }
     }
 }

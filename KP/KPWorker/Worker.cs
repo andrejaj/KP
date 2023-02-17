@@ -4,14 +4,14 @@ namespace KPWorker
 {
     public class Worker : BackgroundService
     {
-        private IHostApplicationLifetime _lifetime;
+        //private IHostApplicationLifetime _lifetime;
         private readonly ILogger<Worker> _logger;
         private readonly IDataScraper _dataScraper;
         private const int DelayInDays = 1;
 
-        public Worker(ILogger<Worker> logger, IHostApplicationLifetime lifetime, IDataScraper dataScraper)
+        public Worker(ILogger<Worker> logger/*, IHostApplicationLifetime lifetime*/, IDataScraper dataScraper)
         {
-            _lifetime = lifetime;
+            //_lifetime = lifetime;
             _logger = logger;
             _dataScraper = dataScraper;
         }
@@ -20,11 +20,11 @@ namespace KPWorker
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
-                                
+                _logger.LogDebug("Worker started at: {time}", DateTimeOffset.Now);
+
                 _dataScraper.LoadData();
 
-                _logger.LogInformation("Worker finished at: {time}", DateTimeOffset.Now);
+                _logger.LogDebug("Worker finished at: {time}", DateTimeOffset.Now);
 
                 await Task.Delay(TimeSpan.FromSeconds(DelayInDays), stoppingToken);
 

@@ -147,7 +147,7 @@ CREATE TABLE [dbo].[Item](
 	[Id] [uniqueidentifier] NOT NULL,
 	[AuthorId] [uniqueidentifier] NOT NULL,
 	[Title] [nchar](100) NULL,
-	[Description] [nchar](3000) NULL,
+	[Description] [varchar](4000) NULL,
 	[Created] [datetime] NOT NULL,
 	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_Offer] PRIMARY KEY CLUSTERED 

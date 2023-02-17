@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KPService
 {
-    internal class DBService : IDBService
+    public class DBService : IDBService
     {
         private readonly ILogger<ItemService> _logger;
         private readonly IRepository _repository;
