@@ -1,4 +1,4 @@
-USE master 
+﻿USE master 
 GO
 
 ALTER database KPProducts set single_user with rollback immediate
@@ -57,7 +57,7 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zora','Petro
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zora','Popovic',NULL)
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ivan','Radovic',NULL)
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ivan','Radović',NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan','Konjovic',NULL)
 GO
@@ -130,6 +130,185 @@ GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sinisa', 'Vukovic', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Jelisaveta', 'Petrovic', NULL)
+GO
+--additional authors
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Pero', 'Popovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Branko', 'Radulovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Todor', 'Svrakic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Mihailo', 'Milovanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Jovan', 'Bijelic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stojan', 'Aralica', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan', 'Konjovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stevan', 'Calic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Borislav', 'Bogdanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ljubisa', 'Valic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Branko', 'Jevtic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan', 'Arsic', 'Daskalo')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milenko', 'Duric', 'D')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Bosiljka', 'Valic', 'Jovancic')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dusan', 'Adamovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Lukijan', 'Bibic', 'Borislav')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Majda', 'Kurnik', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dorde', 'Andrejevic', 'Kun')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Antun', 'Augustincic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Marko', 'Celebonovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Avgust', 'Cernigoja', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Marijan', 'Detoni', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Petar', 'Dobrovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Lozje', 'Dolinar', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vilko', 'Gecan', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Krsto', 'Hegedusic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Rihard', 'Jakopič', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ignjat', 'Job', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan', 'Konjović', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('France', 'Kralj', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Tone', 'Kralj', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Frano', 'Kršinić', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Mirko', 'Kujacic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milo', 'Milunovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Petar', 'Palavicini', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Mihajlo', 'Petrov', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vasa', 'Pomorišac', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Marko', 'Ristić', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Toma', 'Rosandić', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Eduard', 'Stepančič', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sreten', 'Stojanović', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zlatko', 'Šulentić', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sava', 'Šumanović', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ivan', 'Tabaković', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stevan', 'Živadinović', 'Vane')
+GO
+--additional possibly famous
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dragoslav', 'Vasiljevic', 'Figa')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dragomir', 'Glisic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Malisa', 'Glisic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Viktor', 'Zivkovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ljubomir', 'Ivanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Danica', 'Jovanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Kosta', 'Josipovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vidosava', 'Kovacevic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Aleksandar', 'Lazarevic', 'Saca')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zorica', 'Simeonovic', 'Lazic')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ana', 'Marinkovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Kosta', 'Milicevic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan', 'Milovanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zivorad', 'Nastasijevic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dragoljub', 'Pavlovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Miodrag', 'Petrovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Pavle', 'Predragovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Veljko', 'Stanojević', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Borivoje', 'Stevanovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Natalija', 'Cvetkovic', NULL)
+GO
+--additional authors
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vladimir', 'Novosel', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vladimir', 'Jankovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Mirjana', 'Maodus', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Djordje', 'Bosan', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Nadezda', 'Petrovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zoran', 'Mandic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Tomislav', 'Bozovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ljiljana', 'Drezda', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Perisa', 'Milic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dusan', 'Rajsic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dusan', 'Miskovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Frane', 'Krsinic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Venija', 'Vucinic', 'Turinski')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Safet', 'Zec', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Miodrag', 'Rogic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dusan', 'Mikonjic', 'Maher')
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zivojin', 'Turinski', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Bogosav', 'Zivkovic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ivo', 'Kalina', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Slavko', 'Krunic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Branko', 'Miljus', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan', 'Besarabic', NULL)
+GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Kristian', 'Krekovic', NULL)
 GO
 
 /****** Item table  ******/
