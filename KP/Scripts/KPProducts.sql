@@ -59,8 +59,6 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zora','Popov
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ivan','Radović',NULL)
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan','Konjovic',NULL)
-GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zivan','Vulic',NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Nikola','Besevic',NULL)
@@ -123,8 +121,6 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Paja', 'Jova
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Kosta', 'Hakman', NULL)
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Bora', 'Stevanovic', NULL)
-GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milos', 'Gvozenovic', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sinisa', 'Vukovic', NULL)
@@ -143,8 +139,6 @@ GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Jovan', 'Bijelic', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stojan', 'Aralica', NULL)
-GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milan', 'Konjovic', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stevan', 'Calic', NULL)
 GO
@@ -166,7 +160,7 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Lukijan', 'B
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Majda', 'Kurnik', NULL)
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dorde', 'Andrejevic', 'Kun')
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Đorđe', 'Andrejević', 'Kun')
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Antun', 'Augustincic', NULL)
 GO
@@ -259,7 +253,7 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Pavle', 'Pre
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Veljko', 'Stanojević', NULL)
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Borivoje', 'Stevanovic', NULL)
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Borivoje', 'Stevanovic', 'Bora')
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Natalija', 'Cvetkovic', NULL)
 GO
@@ -285,8 +279,6 @@ GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dusan', 'Rajsic', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Dusan', 'Miskovic', NULL)
-GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Frane', 'Krsinic', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Venija', 'Vucinic', 'Turinski')
 GO
