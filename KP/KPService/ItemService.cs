@@ -11,22 +11,20 @@ namespace KPService
     public class ItemService : IItemService
     {
         private readonly ILogger<ItemService> _logger;
-        private readonly Configuration _myConfiguration;
-
-        public ItemService(ILogger<ItemService> logger, Configuration myConfiguration)
+        
+        public ItemService(ILogger<ItemService> logger)
         {
             _logger = logger;
-            _myConfiguration = myConfiguration;
         }
 
-        private int GetPageCount()
+        private int GetPageCount(string url)
         {
             int count = 0;
             using (var client = new RestClient())
             {
                 try
                 {
-                    var request = new RestRequest(_myConfiguration.KPUrl, Method.Get);
+                    var request = new RestRequest(url, Method.Get);
                     var response = client.Execute(request);
                     var content = ExtractValue(response.Content);
                     count = CalculatePageCount(content);
@@ -51,7 +49,7 @@ namespace KPService
         private int CalculatePageCount(string text)
         {
             const int maxItems = 30;
-            var pattern = @"(\d.\d+) rezultata";
+            var pattern = @"(\d+) rezultata";
             Regex rg = new Regex(pattern);
             var match = rg.Match(text);
             var totalCount = double.Parse(match.Groups[1].Value.Replace(".", ""));
@@ -59,18 +57,18 @@ namespace KPService
             return pageCount;
         }
 
-        public List<string> GetItems()
+        public List<string> GetItems(string url)
         {
             var list = new List<string>();
             
-            var count = GetPageCount();
+            var count = GetPageCount(url);
             for (int i = 1; i <= count; i++)
             {
                 try
                 {
                     using (var client = new RestClient())
                     {
-                        var request = new RestRequest(_myConfiguration.KPUrl + "&page="+i, Method.Get);//SearchUri + @"&page={i}", Method.Get);
+                        var request = new RestRequest(url + "&page="+i, Method.Get);
                         var response = client.Execute(request);
                         var content = response.Content;
                         var newItems = ExtractItems(content);

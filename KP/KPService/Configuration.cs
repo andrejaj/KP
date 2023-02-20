@@ -8,6 +8,6 @@ namespace KPService
 {
     public class Configuration
     {
-        public string KPUrl { get; set; }
+        public List<string> KPUrl { get; set; }
     }
 }

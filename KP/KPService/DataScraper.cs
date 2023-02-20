@@ -23,24 +23,32 @@ namespace KPService
         private readonly ILogger<ItemService> _logger;
         private readonly IDBService _dbService;
         private readonly IPipelineProcessor _pipelineProcessor;
+        private readonly Configuration _myConfiguration;
 
-        public DataScraper(ILogger<ItemService> logger, IItemService itemService, IDBService dbService, IPipelineProcessor pipelineProcessor) 
+        public DataScraper(ILogger<ItemService> logger, IItemService itemService, IDBService dbService, IPipelineProcessor pipelineProcessor, Configuration myConfiguration) 
         { 
             _logger= logger ?? throw new ArgumentNullException(nameof(logger));
             _itemService = itemService ?? throw new ArgumentNullException(nameof(itemService));
             _dbService= dbService ?? throw new ArgumentNullException(nameof(dbService));
             _pipelineProcessor = pipelineProcessor ?? throw new ArgumentNullException(nameof(pipelineProcessor));
+            _myConfiguration = myConfiguration;
         }
 
         public void LoadData()
         {
             _logger.LogInformation("Started LoadData from Kp.");
 
-            var items = _itemService.GetItems();
+            var urls = _myConfiguration.KPUrl;
 
-            _logger.LogInformation($"items count {items.Count}");
+            List<string> totalItems= new List<string>();
+            foreach (var url in urls)
+            {
+                var items = _itemService.GetItems(url);
+                _logger.LogInformation($"items count {items.Count}");
+                totalItems.AddRange(items);
+            };
 
-            var newItems = _pipelineProcessor.Process(items);
+            var newItems = _pipelineProcessor.Process(totalItems);
 
             _logger.LogInformation($"new items processed {newItems.Count()}");
 

@@ -5,6 +5,6 @@ namespace KPService
     public interface IItemService
     {
         Item GetItem(string url);
-        List<string> GetItems();
+        List<string> GetItems(string url);
     }
 }
