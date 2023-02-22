@@ -15,5 +15,12 @@ namespace KPService.Helper
             double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("sr-Latn-CS"), out result);
             return result;
         }
+
+        public static bool IsDouble(this string value)
+        {
+            //double result;
+            return double.TryParse(value, System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("sr-Latn-CS"), out var result);
+            //return result;
+        }
     }
 }

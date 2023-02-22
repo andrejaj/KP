@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KPService
+namespace KPService.Enum
 {
-    internal enum PriceType
+    internal enum Status
     {
-        Cena,
-        Kontakt,
-        Dogovor,
-        Pozvati,
-        Kupujem
+        Active,
+        Deactive,
+        OnHold
     }
 }
