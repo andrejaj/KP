@@ -19,11 +19,12 @@ namespace KPService
 
         public void Write(List<Model.Item> items)
         {
-            _logger.LogInformation("Started Writing data to DB.");
+            _logger.LogInformation($"Started Writing data items {items.Count} to KP Database.");
             foreach (var kpItem in items)
             {
                 try
                 {
+                    _logger.LogInformation($"Writing offer - {kpItem.Title} - {kpItem.Sku}");
                     //mapping objects to dto's could be converted to extension methods and passedto repo striaght
                     var item = _mapper.Map<DBModel.Item>(kpItem);
                     var itemOffer = _mapper.Map<DBModel.ItemOffer>(kpItem);
@@ -44,7 +45,7 @@ namespace KPService
                     _logger.LogError(ex, $"Write Item {kpItem.Title} with SKu:{kpItem.Sku} failed to map or write to the database.");
                 }
             }
-            _logger.LogInformation("Finished Writing data to DB.");
+            _logger.LogInformation("Finished Writing data items to KP Database.");
         }
     }
 }

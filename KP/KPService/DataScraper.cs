@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.Execution;
 using KPService.DBModel;
+using KPService.Enum;
 using KPService.Helper;
 using KPService.Model;
 using KPService.PipelineFilter;
@@ -38,15 +39,16 @@ namespace KPService
         {
             _logger.LogInformation("Started LoadData from Kp.");
 
-            var urls = _myConfiguration.KPUrl;
+            var urls = _myConfiguration.KPUrls;
 
             List<string> totalItems= new List<string>();
             foreach (var url in urls)
             {
                 var items = _itemService.GetItems(url);
-                _logger.LogInformation($"items count {items.Count}");
+                _logger.LogInformation($"Category price {GetPriceType(url)} has total count of items {items.Count}");
                 totalItems.AddRange(items);
             };
+            _logger.LogInformation($"Total items {totalItems.Count()}");
 
             var newItems = _pipelineProcessor.Process(totalItems);
 
@@ -56,6 +58,20 @@ namespace KPService
             _dbService.Write(kpItems);
 
             _logger.LogInformation("Finished LoadData from Kp.");
+        }
+
+        private PriceType GetPriceType(string url)
+        {
+            var regex = new Regex("priceText=(.*)&search");
+            var match = regex.Match(url);
+            if (match.Success) 
+            {
+                return ConvertEnum<PriceType>.ToConvert(match.Groups[1].Value);
+            }
+            else
+            {
+                return PriceType.Cena;
+            }
         }
     }
 }
