@@ -37,7 +37,7 @@ namespace KPService
 
                 var newItems = _pipelineProcessor.Process(items); 
 
-                _logger.LogInformation($"new items processed {newItems.Count()}");
+                _logger.LogInformation($"{newItems.Count()} new items in this category processed.");
 
                 var kpItems = newItems.Select(x => _itemService.GetItem(x)).ToList();
                 //converting no price items to correct type
