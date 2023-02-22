@@ -20,7 +20,7 @@ namespace KPService.Filter
             IList<Author> authorsData = new List<Author>();
             foreach (var item in authors)
             {
-                if (searchCriteria.ToLower().RemoveDiacriticalMarks().Contains(item.FirstName.ToLower()))
+                if (searchCriteria.ToLower().RemoveDiacriticalMarks().Contains(item.FirstName.ToLower().RemoveDiacriticalMarks()))
                 {
                     authorsData.Add(item);
                 }
