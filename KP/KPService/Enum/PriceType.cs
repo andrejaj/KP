@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KPService.Enum
 {
-    internal enum PriceType
+    public enum PriceType
     {
         Cena,
         Kontakt,

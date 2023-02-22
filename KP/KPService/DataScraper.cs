@@ -1,20 +1,7 @@
-﻿using AutoMapper;
-using AutoMapper.Execution;
-using KPService.DBModel;
-using KPService.Enum;
-using KPService.Helper;
-using KPService.Model;
+﻿using KPService.Enum;
+using KPService.Extensions;
 using KPService.PipelineFilter;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
-using System.Text.RegularExpressions;
-using System.Xml.Linq;
 
 namespace KPService
 {
@@ -41,37 +28,28 @@ namespace KPService
 
             var urls = _myConfiguration.KPUrls;
 
-            List<string> totalItems= new List<string>();
             foreach (var url in urls)
             {
+                _logger.LogInformation("------------------------");
                 var items = _itemService.GetItems(url);
-                _logger.LogInformation($"Category price {GetPriceType(url)} has total count of items {items.Count}");
-                totalItems.AddRange(items);
+                var priceType = url.GetPriceType();
+                _logger.LogInformation($"Category price {priceType} has total count of items {items.Count}");
+
+                var newItems = _pipelineProcessor.Process(items); 
+
+                _logger.LogInformation($"new items processed {newItems.Count()}");
+
+                var kpItems = newItems.Select(x => _itemService.GetItem(x)).ToList();
+                //converting no price items to correct type
+                if(!priceType.Equals(PriceType.Cena))
+                {
+                    kpItems.ForEach(x => x.ItemOffer.Price = priceType.ToString());
+                }
+
+                _dbService.Write(kpItems);
+                _logger.LogInformation("------------------------");
             };
-            _logger.LogInformation($"Total items {totalItems.Count()}");
-
-            var newItems = _pipelineProcessor.Process(totalItems);
-
-            _logger.LogInformation($"new items processed {newItems.Count()}");
-
-            var kpItems = newItems.Select(x => _itemService.GetItem(x)).ToList();
-            _dbService.Write(kpItems);
-
             _logger.LogInformation("Finished LoadData from Kp.");
-        }
-
-        private PriceType GetPriceType(string url)
-        {
-            var regex = new Regex("priceText=(.*)&search");
-            var match = regex.Match(url);
-            if (match.Success) 
-            {
-                return ConvertEnum<PriceType>.ToConvert(match.Groups[1].Value);
-            }
-            else
-            {
-                return PriceType.Cena;
-            }
         }
     }
 }
