@@ -2,6 +2,15 @@ using KPService;
 using KPService.Filter;
 using KPService.PipelineFilter;
 using KPWorker;
+using Serilog;
+
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .Build();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration)
+    .CreateLogger();
 
 IHost host = Host.CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
@@ -19,14 +28,10 @@ IHost host = Host.CreateDefaultBuilder(args)
         services.AddSingleton<AuthorFilter>();
         services.AddSingleton<Pipeline<IEnumerable<string>>, ItemSelectionPipeline>();
         services.AddSingleton<IPipelineProcessor, PipelineProcessor>();
-
-        services.AddLogging(loggingBuilder =>
-        {
-            var loggingSection = hostContext.Configuration.GetSection("Logging");
-            loggingBuilder.AddFile(loggingSection);
-        });
-
     })
+    .UseSerilog()
     .Build();
 
 await host.RunAsync();
+
+Log.CloseAndFlush();
