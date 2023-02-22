@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using KPService.Enum;
 using KPService.Filter;
 using KPService.Helper;
 using System.Text.RegularExpressions;
@@ -31,9 +32,9 @@ namespace KPService
                     .ForMember(dest => dest.Price, act => act.MapFrom(src => src.ItemOffer.Price.ToDouble()))
                     .ForMember(dest => dest.ValidUntil, act => act.MapFrom(src => src.ItemOffer.ValidUntil))
                     .ForMember(dest => dest.StatusId, act => act.MapFrom(src => (int)Status.Active))
-                    .ForMember(dest => dest.ConditionId, act => act.MapFrom(src => (int)Convert<ItemCondition>.ToConvert(regex.Match(src.ItemOffer.Condition).Groups[2].Value)))
-                    .ForMember(dest => dest.CurrencyId, act => act.MapFrom(src => (int)Convert<Currency>.ToConvert(src.ItemOffer.Currency)))
-                    .ForMember(dest => dest.PriceTypeId, act => act.MapFrom(src => (int)PriceType.Cena))
+                    .ForMember(dest => dest.ConditionId, act => act.MapFrom(src => (int)ConvertEnum<ItemCondition>.ToConvert(regex.Match(src.ItemOffer.Condition).Groups[2].Value)))
+                    .ForMember(dest => dest.CurrencyId, act => act.MapFrom(src => (int)ConvertEnum<Currency>.ToConvert(src.ItemOffer.Currency)))
+                    .ForMember(dest => dest.PriceTypeId, act => act.MapFrom(src => src.ItemOffer.Price.IsDouble() ? (int)PriceType.Cena : (int)ConvertEnum<PriceType>.ToConvert(src.ItemOffer.Price)))
                     .ForMember(dest => dest.Url, act => act.MapFrom(src => src.ItemOffer.Url));
             });
             return new Mapper(config);
