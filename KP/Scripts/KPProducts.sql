@@ -67,6 +67,8 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milica','Bes
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Uros','Toskovic',NULL)
 GO
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Uros','Predic',NULL)
+GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Boris','Rumjancev',NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sava','Stojkov',NULL)
@@ -103,7 +105,7 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Vladimir', '
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ljubica', 'Sokic', 'Cuca')
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Fjedor', 'Kolesnikov', NULL)
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Stepan', 'Kolesnikov', 'Fedor')
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Pasko', 'Vucetic', NULL)
 GO
@@ -121,7 +123,7 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Paja', 'Jova
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Kosta', 'Hakman', NULL)
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milos', 'Gvozenovic', NULL)
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Milos', 'Gvozdenovic', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Sinisa', 'Vukovic', NULL)
 GO
@@ -272,7 +274,7 @@ INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Zoran', 'Man
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Tomislav', 'Bozovic', NULL)
 GO
-INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ljiljana', 'Drezda', NULL)
+INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Ljiljana', 'Drezga', NULL)
 GO
 INSERT INTO [dbo].[Author] (FirstName, LastName, Nickname) VALUES ('Perisa', 'Milic', NULL)
 GO
@@ -613,6 +615,7 @@ GO
 CREATE TABLE [dbo].[VisitedOffers](
 	[Id] [uniqueidentifier] NOT NULL,
 	[Sku] [bigint] NOT NULL,
+	[Url] [nchar](300) NOT NULL,
 	[Created] [datetime] NOT NULL,
 	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_VisitedOffers] PRIMARY KEY CLUSTERED 
