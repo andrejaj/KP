@@ -11,17 +11,17 @@
             _itemSelectionPipeline = itemSelectionPipeline;
             _newItemFilter = newItemFilter;
             _authorFilter = authorFilter;
-        }
 
-        public IEnumerable<string> Process(IEnumerable<string> items)
-        {
             //Register the filters to be executed
             _itemSelectionPipeline
                 .Register(_newItemFilter)
                 .Register(_authorFilter);
+        }
 
+        public IEnumerable<string> Process(IEnumerable<string> items)
+        {
             //Start pipeline processing
-            var newItems = _itemSelectionPipeline.Process(items);
+            var newItems = _itemSelectionPipeline.Process(items).ToList();
             return newItems;
         }
     }

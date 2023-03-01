@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace KPService.PipelineFilter
 {
     public class NewItemFilter : IFilter<IEnumerable<string>>
     {
         private readonly IRepository _repository;
+        private readonly Regex _idPattern = new Regex("(\\/oglas\\/)(\\d+)");
+        private ILogger<NewItemFilter> _logger;
 
-        private HashSet<string> _visistedItems;
-        private readonly Regex _idPattern = new Regex("(\\/)([0-9]+)");
-
-        public NewItemFilter(IRepository repository) 
+        public NewItemFilter(ILogger<NewItemFilter> logger, IRepository repository) 
         {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            _visistedItems = _repository.GetItemIds().ToHashSet();
         }
         public IEnumerable<string> Execute(IEnumerable<string> input)
         {
@@ -27,24 +22,23 @@ namespace KPService.PipelineFilter
             }
 
             var items = new List<string>();
-            if (_visistedItems.Any())
+
+            var _visistedItems = _repository.GetItemIds().ToHashSet();
+            foreach (var item in input)
             {
-                foreach (var item in input)
+                //it may need to precheck if item exists but has expired to update item 
+                var id = _idPattern.Match(item).Groups[2].Value;
+
+                if (!_visistedItems.Contains(id))
                 {
-                    var id = _idPattern.Match(item).Groups[2].Value;
-                    if (!_visistedItems.Contains(id))
-                    {
-                        items.Add(item);
-                        //for next time we know item is added
-                        _repository.InsertVisitedOffers(id);
-                    }
+                    items.Add(item);
+                    //for next time we know item is added, but this won't work for duplicate is found in same list
+                    _repository.InsertVisitedOffers(id, item);
                 }
-            }
-            else
-            {
-                items.AddRange(input);
-                //all items are new
-                items.ForEach(x => _repository.InsertVisitedOffers(_idPattern.Match(x).Groups[2].Value));
+                else
+                {
+                    _logger.LogInformation($"duplicate item found {id} - {item}");
+                }
             }
   
             return items;

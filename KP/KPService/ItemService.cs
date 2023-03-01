@@ -31,7 +31,7 @@ namespace KPService
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Error occured retriving page count");
+                    _logger.LogError(ex, $"Error occured retriving page count - {url}");
                 }
             }
             return count;
@@ -49,7 +49,7 @@ namespace KPService
         private int CalculatePageCount(string text)
         {
             const int maxItems = 30;
-            var pattern = @"(\d+) rezultata";
+            var pattern = @"((\d+.)?\d+) rezultata";
             Regex rg = new Regex(pattern);
             var match = rg.Match(text);
             var totalCount = double.Parse(match.Groups[1].Value.Replace(".", ""));
@@ -67,8 +67,9 @@ namespace KPService
                 try
                 {
                     using (var client = new RestClient())
-                    {
-                        var request = new RestRequest(url + "&page="+i, Method.Get);
+                    {  
+                        var urlRequest = url + $"&page={i}";
+                        var request = new RestRequest(urlRequest, Method.Get);
                         var response = client.Execute(request);
                         var content = response.Content;
                         var newItems = ExtractItems(content);

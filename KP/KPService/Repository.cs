@@ -35,12 +35,15 @@ namespace KPService
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    itemIds = db.Query<string>(@"SELECT Sku FROM [KPProducts].[dbo].[VisitedOffers]").ToList();
+                    itemIds = db.Query<string>(@"SELECT VisitedOffers.Sku From VisitedOffers").ToList(); 
+                    //add line if non expired items are returned.
+                    //tbc what do we do if item is epxired in DB but new add with same id is added, check and extend the date or pre check all data
+                    // Inner Join ItemOffer On VisitedOffers.Sku = ItemOffer.Sku Where ItemOffer.ValidUntil >= GETDATE()").ToList();
                 }
             }
             catch (Exception ex)
             {
-                
+                _logger.LogError(ex, "GetItemIds failed to retrive list of existing offers");
             }
             return itemIds ?? new List<string>();
         }
@@ -63,13 +66,13 @@ namespace KPService
             return authors ?? new List<Author>();
         }
 
-        public int InsertVisitedOffers(string sku)
+        public int InsertVisitedOffers(string sku, string url)
         {
             try
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    var count = db.Execute(@"INSERT INTO VisitedOffers (Sku) VALUES (@sku)", new { sku = sku });
+                    var count = db.Execute(@"INSERT INTO VisitedOffers (Sku, Url) VALUES (@sku, @url)", new { sku = sku, url = url });
                     return count;
                 }
             }

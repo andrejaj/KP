@@ -6,7 +6,7 @@ namespace KPService
     {
         IList<Author> GetAuthors();
         List<string> GetItemIds();
-        int InsertVisitedOffers(string sku);
+        int InsertVisitedOffers(string sku, string url);
         Guid InsertItem(Item item);
         void InsertItemOffer(ItemOffer itemOffer);
         void InsertItemImages(ItemImages itemImages);
