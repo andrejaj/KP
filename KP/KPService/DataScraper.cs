@@ -24,7 +24,7 @@ namespace KPService
 
         public void LoadData()
         {
-            _logger.LogInformation("Started LoadData from Kp.");
+            _logger.LogInformation($"Started LoadData from Kp - Time {DateTime.Now}");
 
             var urls = _myConfiguration.KPUrls;
 
@@ -49,7 +49,7 @@ namespace KPService
                 _dbService.Write(kpItems);
                 _logger.LogInformation("------------------------");
             };
-            _logger.LogInformation("Finished LoadData from Kp.");
+            _logger.LogInformation($"Finished LoadData from Kp - Time {DateTime.Now}");
         }
     }
 }

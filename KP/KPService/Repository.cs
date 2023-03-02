@@ -37,7 +37,7 @@ namespace KPService
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
                     //it excludes expired as we would like to add it as new item, another service might clean expired entries or partially clean them
-                    skus = db.Query<string>(@"SELECT Sku From [KPProducts].[dbo].[VisitedOffers] vo WHERE vo.Sku <> (SELECT VisitedOffers.Sku FROM VisitedOffers INNER JOIN ItemOffer ON VisitedOffers.Sku = ItemOffer.Sku WHERE ItemOffer.ValidUntil < GETDATE())").ToList(); 
+                    skus = db.Query<string>(@"SELECT Sku From [KPProducts].[dbo].[VisitedOffers] vo WHERE vo.Sku NOT IN (SELECT VisitedOffers.Sku FROM VisitedOffers INNER JOIN ItemOffer ON VisitedOffers.Sku = ItemOffer.Sku WHERE ItemOffer.ValidUntil < GETDATE())").ToList(); 
                 }
             }
             catch (Exception ex)
