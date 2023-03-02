@@ -28,7 +28,7 @@ namespace KPService
             _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
-        public List<string> GetItemSkus()
+        public IList<string> GetItemSkus()
         {
             List<string>? skus = null;
 

@@ -5,7 +5,7 @@ namespace KPService
     public interface IRepository
     {
         IList<Author> GetAuthors();
-        List<string> GetItemSkus();
+        IList<string> GetItemSkus();
         int InsertVisitedOffers(string sku, string url);
         Guid InsertItem(Item item);
         void InsertItemOffer(ItemOffer itemOffer);
