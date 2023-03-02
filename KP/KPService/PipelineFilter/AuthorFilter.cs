@@ -40,7 +40,7 @@ namespace KPService.PipelineFilter
                 foreach (var item in input)
                 {
                     var title = _titlePattern.Match(item).Groups[2].Value;
-                    _logger.LogInformation($"title: {title}");
+                    _logger.LogDebug($"title: {title}");
                     var names = title.Split('-').Select(x => x.ToLower()).ToList();
 
                     var author = _compositeFilter.FullNameFilterOn(title);
@@ -53,9 +53,9 @@ namespace KPService.PipelineFilter
                         var authors = _compositeFilter.PartialNameFilterOn(title).ToList();
                         if (authors.Any())
                         {
-                            _logger.LogInformation($"-----------For {title}------------");
-                            authors.ForEach(x => _logger.LogInformation($"Found partial match based on author's first name {x.FirstName} or last name {x.LastName}"));
-                            _logger.LogInformation($"----------------------------------");
+                            _logger.LogDebug($"-----------For {title}------------");
+                            authors.ForEach(x => _logger.LogDebug($"Found partial match based on author's first name {x.FirstName} or last name {x.LastName}"));
+                            _logger.LogDebug($"----------------------------------");
                         }
                     }                 
                 }

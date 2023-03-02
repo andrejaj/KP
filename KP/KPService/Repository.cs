@@ -4,6 +4,7 @@ using KPService.Extensions;
 using Microsoft.Extensions.Logging;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
 
 //using System.Transactions;
 
@@ -138,6 +139,8 @@ namespace KPService
 
         public Guid InsertSeller(DBModel.Seller seller)
         {
+            const int maxColumnSize = 30;
+
             try
             {
                 var sellerFound = GetSeller(seller.Name);
@@ -149,7 +152,7 @@ namespace KPService
                 {
                     using (IDbConnection db = new SqlConnection(_connectionString))
                     {
-                        var id = db.QuerySingle<Guid>(@"INSERT INTO Seller(Name, Phone) OUTPUT INSERTED.Id VALUES (@name, @phone)", new { name = seller.Name, phone = seller.Phone });
+                        var id = db.QuerySingle<Guid>(@"INSERT INTO Seller(Name, Phone) OUTPUT INSERTED.Id VALUES (@name, @phone)", new { name = seller.Name.Truncate(maxColumnSize), phone = seller.Phone });
                         return id;
                     }
                 }

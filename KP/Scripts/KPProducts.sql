@@ -527,8 +527,8 @@ GO
 
 CREATE TABLE [dbo].[Seller](
 	[Id] [uniqueidentifier] NOT NULL,
-	[Name] [nchar](20) NOT NULL,
-	[Phone] [nchar](15) NULL,
+	[Name] [nvarchar](30) NOT NULL,
+	[Phone] [nvarchar](30) NULL,
 	[Created] [datetime] NOT NULL,
 	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_Seller] PRIMARY KEY CLUSTERED 
