@@ -27,25 +27,23 @@ namespace KPService
             _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
-        public List<string> GetItemIds()
+        public List<string> GetItemSkus()
         {
-            List<string>? itemIds = null;
+            List<string>? skus = null;
 
             try
             {
                 using (IDbConnection db = new SqlConnection(_connectionString))
                 {
-                    itemIds = db.Query<string>(@"SELECT VisitedOffers.Sku From VisitedOffers").ToList(); 
-                    //add line if non expired items are returned.
-                    //tbc what do we do if item is epxired in DB but new add with same id is added, check and extend the date or pre check all data
-                    // Inner Join ItemOffer On VisitedOffers.Sku = ItemOffer.Sku Where ItemOffer.ValidUntil >= GETDATE()").ToList();
+                    //it excludes expired as we would like to add it as new item, another service might clean expired entries or partially clean them
+                    skus = db.Query<string>(@"SELECT Sku From [KPProducts].[dbo].[VisitedOffers] vo WHERE vo.Sku <> (SELECT VisitedOffers.Sku FROM VisitedOffers INNER JOIN ItemOffer ON VisitedOffers.Sku = ItemOffer.Sku WHERE ItemOffer.ValidUntil < GETDATE())").ToList(); 
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "GetItemIds failed to retrive list of existing offers");
+                _logger.LogError(ex, "GetItemSkus failed to retrive list of existing offers");
             }
-            return itemIds ?? new List<string>();
+            return skus ?? new List<string>();
         }
 
         public IList<Author> GetAuthors()

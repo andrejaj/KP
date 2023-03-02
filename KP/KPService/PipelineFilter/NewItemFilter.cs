@@ -23,7 +23,7 @@ namespace KPService.PipelineFilter
 
             var items = new List<string>();
 
-            var _visistedItems = _repository.GetItemIds().ToHashSet();
+            var _visistedItems = _repository.GetItemSkus().ToHashSet();
             foreach (var item in input)
             {
                 //it may need to precheck if item exists but has expired to update item 
