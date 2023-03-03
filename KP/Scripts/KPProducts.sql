@@ -461,7 +461,7 @@ GO
 
 CREATE TABLE [dbo].[ItemImage](
 	[Id] [uniqueidentifier] NOT NULL,
-	[url] [nchar](300) NOT NULL,
+	[Url] [nchar](300) NOT NULL,
 	[ItemId] [uniqueidentifier] NOT NULL,
 	[Created] [datetime] NOT NULL,
 	[Modified] [datetime] NOT NULL,
