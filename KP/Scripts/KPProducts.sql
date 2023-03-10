@@ -358,6 +358,7 @@ CREATE TABLE [dbo].[ItemOffer](
 	[StatusId] [int] NULL,
 	[ValidUntil] [datetime] NOT NULL,
 	[Url] [nchar](300) NOT NULL,
+	[ViewItem] [smallint] DEFAULT 0,
 	[Created] [datetime] NOT NULL,
 	[Modified] [datetime] NOT NULL,
  CONSTRAINT [PK_ItemOffer] PRIMARY KEY CLUSTERED 
@@ -439,13 +440,13 @@ CREATE TABLE [dbo].[ItemCondition](
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (1, 'DamagedCondition')
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (0, 'DamagedCondition')
 GO
-INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (2, 'NewCondition')
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (1, 'NewCondition')
 GO
-INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (3, 'RefurbishedCondition')
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (2, 'RefurbishedCondition')
 GO
-INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (4, 'UsedCondition')
+INSERT INTO [dbo].[ItemCondition] (Id, Description) VALUES (3, 'UsedCondition')
 GO
 
 /****** ItemImage table  ******/
