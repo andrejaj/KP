@@ -1,4 +1,7 @@
-﻿namespace KPService.Helper
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("HelperTest")]
+namespace KPService.Helper
 {
     internal static class ConvertEnum<T>
     {
