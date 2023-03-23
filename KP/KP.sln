@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KPWorker", "KPWorker\KPWork
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KPService", "KPService\KPService.csproj", "{656017FA-71B9-4208-820D-24B5C17B8FE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelperTest", "HelperTest\HelperTest.csproj", "{64171895-48DC-45FE-92E8-ECA990B334A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelperTest", "HelperTest\HelperTest.csproj", "{64171895-48DC-45FE-92E8-ECA990B334A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
