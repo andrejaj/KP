@@ -1,6 +1,12 @@
 ﻿USE master 
 GO
 
+/* setup db password**/
+ALTER LOGIN [sa] WITH PASSWORD=N'S3cur3P@ssW0rd!'
+GO
+ALTER LOGIN [sa] ENABLE
+GO
+
 ALTER database KPProducts set single_user with rollback immediate
 GO
 
