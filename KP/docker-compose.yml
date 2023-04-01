@@ -2,19 +2,24 @@ version: '3.4'
 
 services:
   kpworker:
+    #environment:
+    #  - ConnectionString=Server=sql-server-db;Database=KPProducts;User=sa;Password=S3cur3P@ssW0rd!;MultipleActiveResultSets=true;TrustServerCertificate=true
+    container_name: worker-app
     image: ${DOCKER_REGISTRY-}kpworker
-    build:
+    build:  
       context: .
       dockerfile: KPWorker/Dockerfile
-    environment:
-      - ConnectionString=Data Source=sql.data;Initial Catalog=KPProducts;User Id=sa;Password=S3cur3P@ssW0rd!;Pooling=False;Max Pool Size=200;MultipleActiveResultSets=True
     depends_on:
       - db
   db:
-    image: "mcr.microsoft.com/mssql/server:2022-latest"
-    ports:
-     - "5433:1433"
-
+    container_name: sql-server-db
+    #image: "mcr.microsoft.com/mssql/server:2022-latest"
+    build:
+        dockerfile: KPWorker/DB/Dockerfile
     environment:
-       SA_PASSWORD: "S3cur3P@ssW0rd!"
-       ACCEPT_EULA: "Y"
+        - ID=SA
+        - SA_PASSWORD=S3cur3P@ssW0rd!
+        - ACCEPT_EULA=Y
+    #restart: always
+    ports:
+     - "1433:1433"

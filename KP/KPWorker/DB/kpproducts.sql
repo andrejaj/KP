@@ -1,26 +1,19 @@
-﻿USE master 
+﻿USE MASTER 
 GO
 
-/* setup db password**/
-ALTER LOGIN [sa] WITH PASSWORD=N'S3cur3P@ssW0rd!'
-GO
-ALTER LOGIN [sa] ENABLE
-GO
-
-ALTER database KPProducts set single_user with rollback immediate
-GO
-
-DROP DATABASE KPProducts;
-
+IF EXISTS (SELECT 1 FROM sys.databases WHERE [name] = N'KPProducts')
+BEGIN
+    ALTER DATABASE KPProducts SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    DROP DATABASE KPProducts;
+END;
 GO
 
 CREATE DATABASE KPProducts;
-
 GO
 
-/****** Authors table  ******/
-USE [KPProducts]
+USE KPProducts
 GO
+
 
 /****** Object:  Table [dbo].[Author]    Script Date: 25/01/2023 15:26:54 ******/
 SET ANSI_NULLS ON

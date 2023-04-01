@@ -3,6 +3,7 @@ using KPService.Filter;
 using KPService.PipelineFilter;
 using KPWorker;
 using Serilog;
+using System;
 
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
