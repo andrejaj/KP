@@ -1,0 +1,52 @@
+version: '3.4'
+
+services:
+   #kpapi:
+   # container_name: api
+   # image: kpapi
+   # build:
+   #   context: .
+   #   dockerfile: KPAPI/Dockerfile
+   # ports:
+   #   - "8333:8080"
+   ##  depends_on:
+   ##    - kpdb
+   #frontend:
+   #   container_name: view
+   #   image: kpview
+   #   build:
+   #      context: .
+   #      dockerfile: KPAPI/View/Dockerfile
+   #   # depends_on:
+   #   #    - "api"
+   #   #ports:
+   #   #   - "81:80"
+   kpworker:
+    #environment:
+    #  - ConnectionString=Server=sql-server-db;Database=KPProducts;User=sa;Password=S3cur3P@ssW0rd!;MultipleActiveResultSets=true;TrustServerCertificate=true
+    container_name: worker
+    image: kpworker
+    build:  
+       context: .
+       dockerfile: Worker.Dockerfile
+    restart: always
+    networks:
+       - proxynet
+    # depends_on:
+    #    - db
+   db:
+    container_name: dbs
+    image: kpdb
+    build:
+         context: .
+         dockerfile: DB.Dockerfile
+    environment:
+        - ID=SA
+        - SA_PASSWORD=S3cur3P@ssW0rd!
+        - ACCEPT_EULA=Y
+    networks:
+       - proxynet
+    restart: always
+networks:
+   proxynet:
+    name: custom_network

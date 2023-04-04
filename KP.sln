@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7D50A312-25B5-4A51-A12D-7838B5780932}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KPWorker", "src\KPWorker\KPWorker.csproj", "{4462C446-45F8-4B28-8D4E-91B1404134ED}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KPService", "src\KPService\KPService.csproj", "{A135D145-8C3A-4831-8FB2-0BEF588AC802}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7D50A312-25B5-4A51-A12D-7838B5780932}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D50A312-25B5-4A51-A12D-7838B5780932}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D50A312-25B5-4A51-A12D-7838B5780932}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D50A312-25B5-4A51-A12D-7838B5780932}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4462C446-45F8-4B28-8D4E-91B1404134ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4462C446-45F8-4B28-8D4E-91B1404134ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4462C446-45F8-4B28-8D4E-91B1404134ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4462C446-45F8-4B28-8D4E-91B1404134ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A135D145-8C3A-4831-8FB2-0BEF588AC802}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A135D145-8C3A-4831-8FB2-0BEF588AC802}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A135D145-8C3A-4831-8FB2-0BEF588AC802}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A135D145-8C3A-4831-8FB2-0BEF588AC802}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {518B7482-92CE-4CCD-9452-1A13B59BBA6C}
+	EndGlobalSection
+EndGlobal

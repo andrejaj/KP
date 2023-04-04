@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>dotnet-KPWorker-0190b47c-b1f1-4ad3-8fc2-4185459031bf</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,11 @@
     <Content Remove="Log\**" />
     <EmbeddedResource Remove="Log\**" />
     <None Remove="Log\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Dockerfile" />
+    <None Remove="Dockerfile.original" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +33,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\KPService\KPService.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\.dockerignore" />
   </ItemGroup>
 </Project>
